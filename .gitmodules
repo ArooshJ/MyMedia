@@ -1,0 +1,3 @@
+[submodule "MyMediaFrontend"]
+	path = MyMediaFrontend
+	url = https://github.com/ArooshJ/React-projs
