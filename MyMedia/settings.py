@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # manually added
-    'SocMed.apps.SocmedConfig',
-    'rest_framework',
-    'corsheaders',
-    'rest_framework_simplejwt.token_blacklist',
+    'SocMed.apps.SocmedConfig', # for configuring app into main server
+    'rest_framework', # for integrating rest framework
+    'corsheaders', # to add corsheaders, this is necessary to handle errors regarding requests made from a site other than port 8000(main site)
+    'rest_framework_simplejwt.token_blacklist', # helpful to blacklist previous jwt access  tokens once the user logs in with a refresh users, else, multiple tokens could be used to log in for the same person
 ]
 
 ## Tell django to use simple jwt for authentications --
