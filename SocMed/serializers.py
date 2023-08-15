@@ -13,6 +13,7 @@ class AccountSerializer(ModelSerializer):
         return account
 class PostSerializer(ModelSerializer):
     by_name = serializers.CharField(source='by.__str__', read_only=True) 
+    image = serializers.ImageField()
     class Meta:
         model = Post
         fields = '__all__'

@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from rest_framework.response import Response
-from rest_framework.decorators import api_view,permission_classes
+from rest_framework.decorators import api_view,permission_classes,parser_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import Post,Comment,Reply,Account
 from .serializers import PostSerializer,AccountSerializer,CommentSerializer,ReplySerializer,UserSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
+from rest_framework.parsers import MultiPartParser
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -74,6 +75,7 @@ def postreply(request):
          return Response({'message': 'Reply posted successfully'}, status=status.HTTP_201_CREATED)
     print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 def postcomment(request):
     serializer = CommentSerializer(data = request.data)
@@ -85,10 +87,30 @@ def postcomment(request):
          return Response({'message': 'Comment posted successfully'}, status=status.HTTP_201_CREATED)
     print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 @api_view(['POST'])
+@parser_classes([MultiPartParser])
 def newPost(request):
-    serializer = PostSerializer(data = request.data)
-   # print(request.data, 'valid? ',serializer.is_valid())
+    # print('request accepted')
+    # serializer = PostSerializer(data = request.data)
+    # print(request.data, 'valid? ',serializer.is_valid())
+
+    content = request.data.get('content')
+    by = request.data.get('by')
+    by_name = request.data.get('by_name')
+    likes = request.data.get('likes')
+    link = request.data.get('link')
+    shares = request.data.get('shares')
+
+    # Assuming you have a serializer for the Post model called PostSerializer
+    serializer = PostSerializer(data={
+        'content': content,
+        'by': by,
+        'by_name': by_name,
+        'likes': likes,
+        'shares': shares,
+    },files = request.FILES)
     
     if serializer.is_valid():
          user = serializer.save()

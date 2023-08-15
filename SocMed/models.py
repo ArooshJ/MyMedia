@@ -9,7 +9,7 @@ class Account(models.Model):
     Followers = models.ManyToManyField('self',symmetrical=False, blank=True,null=True,related_name='Following')
     # Following= models.ManyToManyField('self',blank=True,null=True)
 
-    dp = models.CharField(max_length=1000, blank=True,null=True)
+    dp = models.ImageField(upload_to='dps/',null=True,blank=True)
     Bio = models.CharField(max_length=1000, blank=True,null=True)
     Name = models.CharField(max_length=100, blank=True,null=True)
     
@@ -19,7 +19,8 @@ class Account(models.Model):
     
 class Post(models.Model):
     content = models.TextField(null =True, blank=True)
-    link = models.CharField(max_length=1000, null = True, blank=True)
+    file = models.FileField(upload_to='postfiles/',null=True,blank=True)
+    image = models.ImageField(upload_to='media/',null=True,blank=True)
     created = models.DateTimeField(auto_now_add=True)
     by = models.ForeignKey(Account, on_delete=models.CASCADE,null=True,blank=True)
     likes = models.IntegerField(default=0)
