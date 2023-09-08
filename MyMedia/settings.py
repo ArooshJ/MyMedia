@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
-import os
+import os # import manually
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,7 +58,7 @@ REST_FRAMEWORK = {
 
 
 
-
+# JWT used for auth - copied from jwt website
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
@@ -67,7 +67,7 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": False,
 
     "ALGORITHM": "HS256",
-    # "SIGNING_KEY": settings.SECRET_KEY, # ren=moved but exists by defaulr
+    # "SIGNING_KEY": settings.SECRET_KEY, # remmoved but exists by default....
     "VERIFYING_KEY": "",
     "AUDIENCE": None,
     "ISSUER": None,
@@ -88,7 +88,7 @@ SIMPLE_JWT = {
     "JTI_CLAIM": "jti",
 
     "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5),
+    "SLIDING_TOKEN_LIFETIME": timedelta(minutes=5), # access token lifetime
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 
     "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
@@ -115,7 +115,7 @@ ROOT_URLCONF = 'MyMedia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'MyMediaFrontend/build')],
+        'DIRS': [os.path.join(BASE_DIR,'MyMediaFrontend/build')], # to tell the frontend
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -177,8 +177,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS =[ os.path.join(BASE_DIR,'MyMediaFrontend/build/static')]
-MEDIA_URL = 'media/'
+STATICFILES_DIRS =[ os.path.join(BASE_DIR,'MyMediaFrontend/build/static')] # added manually
+MEDIA_URL ='media/' # Added msnnuslly  
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

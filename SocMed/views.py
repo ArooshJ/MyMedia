@@ -100,8 +100,11 @@ def newPost(request):
     by = request.data.get('by')
     by_name = request.data.get('by_name')
     likes = request.data.get('likes')
-    link = request.data.get('link')
     shares = request.data.get('shares')
+    # if request.FILES.image:
+    #  image = request.FILES.get('image')
+    # else:
+    #  image= null -- TO BE WORKED ON...
 
     # Assuming you have a serializer for the Post model called PostSerializer
     serializer = PostSerializer(data={
@@ -110,10 +113,14 @@ def newPost(request):
         'by_name': by_name,
         'likes': likes,
         'shares': shares,
-    },files = request.FILES)
+        #'image':request.FILES.get('image'),
+    },)
     
     if serializer.is_valid():
-         user = serializer.save()
+         post = serializer.save()
+        #  if image:
+        #      post.image = image
+        #      post.save()
          
          return Response({'message': 'Posted successfully'}, status=status.HTTP_201_CREATED)
     print(serializer.errors)
