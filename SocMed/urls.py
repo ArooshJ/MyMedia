@@ -19,6 +19,6 @@ urlpatterns = [
     path('postreplies/',views.postreply,name="postreply"),
     path('postcomments/',views.postcomment,name="postcomment"),
     path('createuser/',views.createUser,name="createUser" ),
-    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'), # jwt token auth stuff...
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # jwt stuf.....
 ]

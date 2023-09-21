@@ -7,13 +7,13 @@ class AccountSerializer(ModelSerializer):
     class Meta:
         model = Account
         fields = '__all__'
-        extra_kwargs = {'id':{'read_only':True}}
+        extra_kwargs = {'id':{'read_only':True}} # this is to be done for primary keys, theres some deep reason tho.
     def create(self,validated_data):
         account = Account.objects.create(**validated_data)
         return account
 class PostSerializer(ModelSerializer):
     by_name = serializers.CharField(source='by.__str__', read_only=True) 
-    image = serializers.ImageField()
+  #  image = serializers.ImageField()
     class Meta:
         model = Post
         fields = '__all__'

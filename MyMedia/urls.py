@@ -22,8 +22,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/',include('SocMed.urls')),
+    path('api/',include('SocMed.urls')), # used to incldue urls.py of app in main project
     path('', views.index)
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)  #used to configure media root files(to be learnt)

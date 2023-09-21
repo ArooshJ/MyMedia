@@ -1,15 +1,15 @@
 from django.shortcuts import render
-from rest_framework.response import Response
+from rest_framework.response import Response # for rest framework api views
 from rest_framework.decorators import api_view,permission_classes,parser_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import Post,Comment,Reply,Account
 from .serializers import PostSerializer,AccountSerializer,CommentSerializer,ReplySerializer,UserSerializer
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer # for auth
+from rest_framework_simplejwt.views import TokenObtainPairView # for auth
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser  # for imgs
 
-
+# I dont remember if i copied this, ig yes.. jwt websitr for details;
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -20,6 +20,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # ...
 
         return token
+# May be this is also copied
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
